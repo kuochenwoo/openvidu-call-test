@@ -1,3 +1,5 @@
+const fs = require('fs');
+const https = require('https');
 import * as cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
@@ -28,6 +30,10 @@ const authService = AuthService.getInstance();
 dotenv.config();
 const app = express();
 
+const privateKey = fs.readFileSync('./privkey.pem', 'utf8');
+const certificate = fs.readFileSync('./fullchain.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
 // Allow cors by default
 // Modify this if you want to restrict access to the server
 app.use(
@@ -49,7 +55,10 @@ app.use('/auth', authController);
 if (CALL_OPENVIDU_CERTTYPE === 'selfsigned') {
 	process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
-app.listen(SERVER_PORT, () => {
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(SERVER_PORT, () => {
 	const credential = chalk.yellow;
 	const text = chalk.cyanBright;
 	const enabled = chalk.greenBright;

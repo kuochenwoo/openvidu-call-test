@@ -1,16 +1,16 @@
-[![License badge](https://img.shields.io/badge/license-Apache2-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![OpenVidu Tests](https://github.com/OpenVidu/openvidu/actions/workflows/openvidu-ce-test.yml/badge.svg)](https://github.com/OpenVidu/openvidu/actions/workflows/openvidu-ce-test.yml)
-[![OpenVidu Tests](https://github.com/OpenVidu/openvidu/actions/workflows/openvidu-components-angular-E2E.yml/badge.svg)](https://github.com/OpenVidu/openvidu/actions/workflows/openvidu-components-angular-E2E.yml)
-[![OpenVidu Tests](https://github.com/OpenVidu/openvidu-call/actions/workflows/openvidu-call-e2e-test.yml/badge.svg)](https://github.com/OpenVidu/openvidu-call/actions/workflows/openvidu-call-e2e-test.yml)
+shows device not found if using HTTP in LAN instead of using HTTPS
+frontend and backend also need to use SSL cert for webRTC to find out the device
+for localhost, HTTP is fine
 
-[![Documentation Status](https://readthedocs.org/projects/openvidu/badge/?version=stable)](https://docs.openvidu.io/en/stable/?badge=stable)
-[![Docker badge](https://img.shields.io/docker/pulls/fiware/orion.svg)](https://hub.docker.com/r/openvidu/openvidu-call/)
-[![Support badge](https://img.shields.io/badge/support-sof-yellowgreen.svg)](https://openvidu.discourse.group/)
+server addr: 5443
+backend addr: 5442
+frontend addr: 4200
 
-[![][openvidulogo]](http://openvidu.io)
+run frontend:
+npx ng serve --ssl --host 0.0.0.0
 
-# openvidu-call
+run backend:
+npm run dev:start
 
-[openvidulogo]: https://secure.gravatar.com/avatar/5daba1d43042f2e4e85849733c8e5702?s=120
-
-Visit [OpenVidu Call Documentation](https://openvidu.io/openvidu-call)
+run server:
+docker-compose up
